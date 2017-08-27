@@ -20,6 +20,9 @@
     </div>
 
     <script type="text/javascript">
+        var posY;
+        var posX;
+
         $(document).ready(function(){
             var joystickView = new JoystickView(150, function(callbackView){
                 $("#joystickContent").append(callbackView.render().el);
@@ -28,11 +31,21 @@
                 }, 0);
             });
             joystickView.bind("verticalMove", function(y){
+                posY = y;
                 $("#yVal").html(y);
             });
             joystickView.bind("horizontalMove", function(x){
+                posX = x;
                 $("#xVal").html(x);
             });
+
+          $("#joystickContent").mouseup(function() {
+            posY = 0
+            posX = 0;
+            $("#yVal").html(posY);
+            $("#xVal").html(posX);
+          })
+
         });
     </script>
     </body>
